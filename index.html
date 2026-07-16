@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>虛境民主共和國 — 機器人建置計畫</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans TC', sans-serif;
+    background: #f4f2ed;
+    color: #1e1e2a;
+    line-height: 1.7;
+  }
+
+  /* ─── 首頁區 ─── */
+  .hero {
+    background: #0f1a2e;
+    color: #e8d5a3;
+    padding: 70px 24px 50px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #fff;
+  }
+  .hero .sub {
+    font-size: 0.95rem;
+    margin-top: 10px;
+    opacity: 0.7;
+    color: #ccc;
+  }
+  .hero .info {
+    margin-top: 24px;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: #b8ad91;
+  }
+
+  /* ─── 目錄 ─── */
+  .toc-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 18px 20px;
+    background: #fff;
+    border-bottom: 1px solid #e0ddd6;
+  }
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    justify-content: center;
+    list-style: none;
+  }
+  .toc a {
+    color: #5a4e3a;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: 0.15s;
+  }
+  .toc a:hover {
+    border-bottom-color: #c9a84c;
+    color: #0f1a2e;
+  }
+
+  /* ─── 內容 ─── */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 32px 36px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+
+  .card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #dcc89a;
+    color: #0f1a2e;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 20px 0 8px;
+    color: #2f4060;
+  }
+
+  .card p {
+    margin-bottom: 10px;
+    color: #2a2a3a;
+  }
+
+  .card ul, .card ol {
+    margin: 6px 0 12px 20px;
+  }
+  .card li {
+    margin-bottom: 5px;
+  }
+
+  /* ─── 表格 ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px;
+    font-size: 0.9rem;
+  }
+  th, td {
+    border: 1px solid #e0ddd6;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #0f1a2e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  tr:nth-child(even) td {
+    background: #faf9f6;
+  }
+
+  /* ─── 引言框 ─── */
+  .callout {
+    background: #f6f3ec;
+    border-left: 4px solid #c9a84c;
+    padding: 14px 18px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.92rem;
+  }
+
+  /* ─── 核准欄 ─── */
+  .sign-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .sign-item {
+    border: 1px solid #e0ddd6;
+    border-radius: 4px;
+    padding: 12px 16px;
+  }
+  .sign-item .label {
+    font-size: 0.82rem;
+    color: #888;
+    margin-bottom: 2px;
+  }
+  .sign-item .line {
+    border-bottom: 2px dashed #ccc;
+    height: 28px;
+    margin-top: 4px;
+  }
+
+  /* ─── 頁腳 ─── */
+  .footer {
+    text-align: center;
+    padding: 32px 20px;
+    color: #888;
+    font-size: 0.85rem;
+    line-height: 1.9;
+    border-top: 1px solid #e0ddd6;
+    margin-top: 10px;
+  }
+
+  /* ─── RWD ─── */
+  @media (max-width: 540px) {
+    .hero h1 { font-size: 1.5rem; }
+    .card { padding: 20px 16px; }
+    .sign-grid { grid-template-columns: 1fr; }
+    th, td { padding: 5px 8px; font-size: 0.8rem; }
+    .toc { gap: 2px 8px; }
+    .toc a { font-size: 0.78rem; }
+  }
+
+  @media print {
+    .toc-wrap { display: none; }
+    .card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>國家機器人系統建置計畫書</h1>
+  <div class="sub">虛境民主共和國 · Veridia Democratic Republic</div>
+  <div class="info">
+    技術發展部 呈報<br>
+    文件編號 VDR-BOT-2026-001 ｜ 2026 年 7 月 16 日
+  </div>
+</div>
+
+<div class="toc-wrap">
+  <ul class="toc">
+    <li><a href="#abstract">摘要</a></li>
+    <li><a href="#why">為什麼需要</a></li>
+    <li><a href="#goals">要做什麼</a></li>
+    <li><a href="#features">功能</a></li>
+    <li><a href="#tech">技術</a></li>
+    <li><a href="#schedule">時程</a></li>
+    <li><a href="#org">分工</a></li>
+    <li><a href="#budget">經費</a></li>
+    <li><a href="#risk">風險</a></li>
+    <li><a href="#suggest">建議</a></li>
+    <li><a href="#sign">核准</a></li>
+  </ul>
+</div>
+
+<div class="container">
+
+  <!-- 摘要 -->
+  <div class="card" id="abstract">
+    <h2>摘要</h2>
+    <table>
+      <tr><th style="width:100px">項目</th><th>內容</th></tr>
+      <tr><td>系統名稱</td><td><strong>VeridiaBot</strong></td></tr>
+      <tr><td>技術</td><td>Node.js、Discord.js v14</td></tr>
+      <tr><td>開發時間</td><td>約 8 週</td></tr>
+      <tr><td>花費</td><td>一年不到 15 美元</td></tr>
+      <tr><td>效益</td><td>行政自動化、外交管理、公民服務一站完成</td></tr>
+    </table>
+    <p style="margin-top:12px">做一個專屬於虛境民主共和國的 Discord 機器人，讓政府運作更順暢，公民服務更即時，也算是落實「虛實共生，技術強國」這句話。</p>
+  </div>
+
+  <!-- 為什麼需要 -->
+  <div class="card" id="why">
+    <h2>為什麼需要</h2>
+
+    <h3>國家現況</h3>
+    <p>VDR 從 2025 年 7 月成立到現在，已經有完整的行政區劃（繁星都、北原省、中京省、海晏省、恆陽省、嵐山自治省、西苑省），也有自己的貨幣「尐尐幣」。外交上跟 19 個國家建交，也進了 ICEA。</p>
+
+    <h3>現在遇到的問題</h3>
+    <ol>
+      <li>公告、命令、會議排程都靠手動，沒有一個固定的流程</li>
+      <li>公民越來越多，註冊、驗證、查資料這些都需要自動化</li>
+      <li>邦交國一直在增加，大使館頻道和外交文件需要好好管理</li>
+      <li>伺服器需要有自動審核和防護機制</li>
+      <li>國家資訊分散在各處，沒有一個地方可以統一查</li>
+    </ol>
+  </div>
+
+  <!-- 要做什麼 -->
+  <div class="card" id="goals">
+    <h2>要做什麼</h2>
+    <p><strong>一句話：做一個 VDR 專屬的 Discord 機器人，把政府、公民、外交、經濟、安全這些事情自動化。</strong></p>
+
+    <table>
+      <tr><th>面向</th><th>目標</th></tr>
+      <tr><td>政府治理</td><td>總統令電子化發布、行政命令自動執行、會議排程、七個行政區的頻道管理</td></tr>
+      <tr><td>公民服務</td><td>註冊、驗證、查資料、申訴、身分組自動發放</td></tr>
+      <tr><td>外交事務</td><td>邦交國資料庫、大使館頻道、外交文件格式統一、國際組織事務</td></tr>
+      <tr><td>國家經濟</td><td>尐尐幣錢包、轉帳、國家金庫、統計報表</td></tr>
+      <tr><td>國家安全</td><td>過濾違規內容、擋釣魚連結、防轟炸、審核紀錄</td></tr>
+      <tr><td>國家資訊</td><td>統一查國家資料、歷史事件、行政區介紹</td></tr>
+    </table>
+  </div>
+
+  <!-- 功能 -->
+  <div class="card" id="features">
+    <h2>功能有哪些</h2>
+
+    <h3>政府管理</h3>
+    <p>總統跟內閣成員會用到的工具：</p>
+    <ul>
+      <li>發布總統令，自動歸檔，推播給所有人</li>
+      <li>授權管理員執行系統設定或發公告</li>
+      <li>會議自動排程、發提醒、產會議紀錄</li>
+      <li>各行政區的頻道權限自動設定好</li>
+    </ul>
+
+    <h3>公民服務</h3>
+    <ul>
+      <li>填表單註冊，自動審核</li>
+      <li>用 Discord 帳號驗證身分</li>
+      <li>依身分自動給對應的身分組</li>
+      <li>查自己的註冊資料、餘額</li>
+      <li>提交申訴，審核完自動通知</li>
+    </ul>
+
+    <h3>外交管理</h3>
+    <ul>
+      <li>紀錄邦交國資訊、建交日期、大使</li>
+      <li>建交時自動開大使館頻道</li>
+      <li>標準格式發外交照會或聲明</li>
+      <li>ICEA 等國際組織的事務管理</li>
+    </ul>
+
+    <h3>經濟系統</h3>
+    <ul>
+      <li>每個人自動有錢包</li>
+      <li>公民之間可以轉帳</li>
+      <li>總統和財長管國家金庫</li>
+      <li>自動產經濟報表</li>
+    </ul>
+
+    <h3>安全審核</h3>
+    <ul>
+      <li>自己設過濾詞，自動刪違規訊息</li>
+      <li>偵測釣魚連結</li>
+      <li>短時間大量加入或重複發言會自動處理</li>
+      <li>累犯會加重處罰</li>
+      <li>所有審核事件都紀錄下來，備份到 Google Sheets</li>
+    </ul>
+
+    <h3>國家資訊查詢</h3>
+    <p>預計會有的指令：</p>
+    <ul>
+      <li><code>/vdr info</code> — 國家總覽</li>
+      <li><code>/vdr history</code> — 歷史事件</li>
+      <li><code>/vdr geography</code> — 行政區介紹</li>
+      <li><code>/vdr culture</code> — 文化展示</li>
+    </ul>
+  </div>
+
+  <!-- 技術 -->
+  <div class="card" id="tech">
+    <h2>技術怎麼做</h2>
+
+    <h3>架構</h3>
+    <p>VeridiaBot 核心分四層：</p>
+    <ul>
+      <li><strong>指令處理層</strong> — 斜線指令、按鈕、選單</li>
+      <li><strong>事件處理層</strong> — 成員進出、訊息審核、互動回應</li>
+      <li><strong>服務處理層</strong> — 政府、公民、外交、經濟、安全</li>
+      <li><strong>資料儲存層</strong> — JSON 檔案、Google Sheets</li>
+    </ul>
+
+    <h3>用什麼</h3>
+    <table>
+      <tr><th style="width:100px">項目</th><th>技術</th></tr>
+      <tr><td>語言</td><td>Node.js 22+</td></tr>
+      <tr><td>框架</td><td>Discord.js v14</td></tr>
+      <tr><td>語音</td><td>@discordjs/voice</td></tr>
+      <tr><td>資料庫</td><td>JSON + Google Sheets</td></tr>
+      <tr><td>驗證</td><td>Discord OAuth2</td></tr>
+      <tr><td>後臺</td><td>Express + EJS</td></tr>
+      <tr><td>部署</td><td>Docker</td></tr>
+    </table>
+
+    <h3>優勢</h3>
+    <ol>
+      <li><strong>便宜</strong> — 部署在 Render 免費方案，一年花不到 15 美元</li>
+      <li><strong>好擴充</strong> — 功能都模組化，以後要加東西很方便</li>
+      <li><strong>資料安全</strong> — 每天自動備份到 Google Sheets</li>
+      <li><strong>技術成熟</strong> — Discord.js 很多人用，穩定沒問題</li>
+    </ol>
+  </div>
+
+  <!-- 時程 -->
+  <div class="card" id="schedule">
+    <h2>時程</h2>
+
+    <h3>第一階段（第 1-2 週）：打基礎</h3>
+    <table>
+      <tr><th>週</th><th>做什麼</th><th>產出</th></tr>
+      <tr><td>1</td><td>裝環境、初始化、做國家識別功能</td><td>機器人會動，有 /vdr info</td></tr>
+      <tr><td>2</td><td>OAuth2 驗證、公民註冊、身分組管理</td><td>可以註冊和驗證</td></tr>
+    </table>
+
+    <h3>第二階段（第 3-5 週）：核心功能</h3>
+    <table>
+      <tr><th>週</th><th>做什麼</th><th>產出</th></tr>
+      <tr><td>3</td><td>政府管理（總統令、行政命令、行政區）</td><td>政府功能上線</td></tr>
+      <tr><td>4</td><td>外交管理（邦交國、大使館、外交文件）</td><td>外交功能上線</td></tr>
+      <tr><td>5</td><td>安全審核（過濾詞、釣魚防護、防轟炸）</td><td>安全功能上線</td></tr>
+    </table>
+
+    <h3>第三階段（第 6-7 週）：進階功能</h3>
+    <table>
+      <tr><th>週</th><th>做什麼</th><th>產出</th></tr>
+      <tr><td>6</td><td>經濟系統（錢包、轉帳、金庫）</td><td>經濟功能上線</td></tr>
+      <tr><td>7</td><td>資訊查詢、投票、管理後臺</td><td>後臺上線</td></tr>
+    </table>
+
+    <h3>第四階段（第 8 週）：上線</h3>
+    <table>
+      <tr><th>週</th><th>做什麼</th><th>產出</th></tr>
+      <tr><td>8</td><td>測試、驗收、部署</td><td>正式上線</td></tr>
+    </table>
+  </div>
+
+  <!-- 分工 -->
+  <div class="card" id="org">
+    <h2>誰負責</h2>
+    <table>
+      <tr><th>角色</th><th>負責什麼</th></tr>
+      <tr><td>總統</td><td>確認方向、重大決定</td></tr>
+      <tr><td>技術發展部</td><td>設計架構、寫程式、維護</td></tr>
+      <tr><td>外交部</td><td>確認外交功能需求</td></tr>
+      <tr><td>內閣成員</td><td>測試、給意見</td></tr>
+    </table>
+  </div>
+
+  <!-- 經費 -->
+  <div class="card" id="budget">
+    <h2>花多少錢</h2>
+    <table>
+      <tr><th>項目</th><th>費用</th><th>備註</th></tr>
+      <tr><td>Render 主機</td><td>免費</td><td>用免費方案</td></tr>
+      <tr><td>Google Sheets</td><td>免費</td><td>用量在免費範圍內</td></tr>
+      <tr><td>Discord Bot</td><td>免費</td><td></td></tr>
+      <tr><td>網域（選購）</td><td>10-15 美元/年</td><td>vdr-bot.gov.veridia</td></tr>
+      <tr style="font-weight:600"><td><strong>總計</strong></td><td><strong>0-15 美元/年</strong></td><td></td></tr>
+    </table>
+    <p style="margin-top:10px">人力部分：技術發展部工程師兼職做，一週約 5-10 小時，再加上維護和測試的人。</p>
+  </div>
+
+  <!-- 風險 -->
+  <div class="card" id="risk">
+    <h2>風險</h2>
+    <table>
+      <tr><th>風險</th><th>影響</th><th>機率</th><th>怎麼處理</th></tr>
+      <tr><td>Discord API 改版</td><td>高</td><td>中</td><td>追蹤更新，留版本緩衝</td></tr>
+      <tr><td>被攻擊</td><td>中</td><td>中</td><td>速率限制、自動封鎖</td></tr>
+      <tr><td>資料不見</td><td>高</td><td>低</td><td>每天備份到 Google Sheets</td></tr>
+      <tr><td>開發延誤</td><td>中</td><td>中</td><td>先做核心功能，其餘慢慢補</td></tr>
+      <tr><td>服務斷掉</td><td>中</td><td>低</td><td>監控告警、準備備援</td></tr>
+    </table>
+  </div>
+
+  <!-- 建議 -->
+  <div class="card" id="suggest">
+    <h2>建議</h2>
+
+    <h3>請總統核准</h3>
+    <ol>
+      <li>同意這個計畫</li>
+      <li>由技術發展部主辦</li>
+      <li>請相關部會配合提供需求跟測試</li>
+    </ol>
+
+    <h3>後續</h3>
+    <ol>
+      <li>開發期間定期跟總統報告進度</li>
+      <li>功能做完就上線試用</li>
+      <li>根據大家反應調整</li>
+      <li>穩定之後可以考慮開源</li>
+    </ol>
+  </div>
+
+  <!-- 核准 -->
+  <div class="card" id="sign">
+    <h2>核准欄</h2>
+    <div class="sign-grid">
+      <div class="sign-item">
+        <div class="label">總統</div>
+        <div class="line"></div>
+      </div>
+      <div class="sign-item">
+        <div class="label">技術發展部長</div>
+        <div class="line"></div>
+      </div>
+      <div class="sign-item">
+        <div class="label">外交部長</div>
+        <div class="line"></div>
+      </div>
+      <div class="sign-item">
+        <div class="label">日期</div>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  技術發展部 謹呈<br>
+  2026 年 7 月 16 日
+</div>
+
+</body>
+</html>
